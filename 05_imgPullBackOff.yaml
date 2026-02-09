@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: imgPullBackOff
+spec:
+  containers:
+    - name: imgPullBackOff
+      image: nginxxx
+      ports:
+        - containerPort: 80
