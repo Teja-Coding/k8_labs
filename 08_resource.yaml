@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Pod
 metadata: 
-  name: learning_resource
+  name: learning-resource
 spec:
   containers:
-  - name: learning_resource
+  - name: learning-resource
     image: nginx
     resources:
       requests:
