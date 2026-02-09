@@ -6,3 +6,7 @@ spec:
   containers:
   - name: crashloopbackoff
     image: almalinux:9
+    command:
+    - sleep
+    args:
+    - 3600

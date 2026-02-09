@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: annotations
+  annotations:
+    git-url: "https://github.com/daws-86s/notes/blob/main/session-58.txt"
+    imageregistry: "https://github.com/daws-86s/notes"
+spec:
+  containers:
+  - name: annotations
+    image: nginx
