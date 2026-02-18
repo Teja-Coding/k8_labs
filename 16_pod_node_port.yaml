@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: nginx-np
+  name: my-service-node-port-use
   labels:
     project: roboshop
     component: frontend
