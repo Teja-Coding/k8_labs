@@ -1,27 +1,34 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: apps/v1        # Kubernetes API version used for Deployment resource
+kind: Deployment           # Type of Kubernetes object (Deployment manages Pods)
+
 metadata:
-  name: nginx-deployment
+  name: nginx-deployment   # Name of the Deployment (must be unique in namespace)
   labels:
-    app: nginx
-    project: roboshop
-    purpose: deployment-nginx
+    app: nginx             # Label to identify the application
+    project: roboshop      # Custom label for grouping under project "roboshop"
+    purpose: deployment-nginx   # Label describing purpose of this resource
+
 spec:
-  replicas: 5
+  replicas: 5              # Number of Pod replicas Kubernetes should maintain
+
   selector:
     matchLabels:
-      app: nginx
+      app: nginx           # Deployment will manage Pods with these labels
       project: roboshop
       purpose: deployment-nginx
-  template: 
+      # IMPORTANT: must match template.metadata.labels below
+
+  template:                # Pod template — defines how Pods should be created
     metadata:
       labels:
-        app: nginx
+        app: nginx         # Labels assigned to created Pods
         project: roboshop
         purpose: deployment-nginx
-    spec:
+        # These labels MUST match selector.matchLabels
+
+    spec:                  # Specification of the Pod
       containers:
-        - name: nginx
-          image: nginx:1.14.2
+        - name: nginx      # Name of the container inside the Pod
+          image: nginx:1.14.2   # Docker image + tag used for container
           ports:
-            - containerPort: 80
+            - containerPort: 80   # Container listens on port 80 (HTTP)
