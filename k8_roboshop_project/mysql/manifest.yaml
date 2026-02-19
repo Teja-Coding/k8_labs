@@ -38,20 +38,20 @@ spec:
     spec:
       containers:
         - name: mysql
-          image: tejahere/mysql:v1
+          image: tejahere/mysql:v1  
           imagePullPolicy: Always   # Always pull image from Docker Hub
 
-          readinessProbe:           # Pod ready check
-            tcpSocket:
-              port: 3306
-            initialDelaySeconds: 10
-            periodSeconds: 10
+          # readinessProbe:           # Pod ready check
+          #   tcpSocket:
+          #     port: 3306
+          #   initialDelaySeconds: 10
+          #   periodSeconds: 10
 
-          livenessProbe:            # Pod health check
-            tcpSocket:
-              port: 3306
-            initialDelaySeconds: 20
-            periodSeconds: 5
+          # livenessProbe:            # Pod health check
+          #   tcpSocket:
+          #     port: 3306
+          #   initialDelaySeconds: 20
+          #   periodSeconds: 5
 
           ports:
             - containerPort: 3306   # MySQL default port
