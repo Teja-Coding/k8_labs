@@ -1,15 +1,16 @@
-apiVersion: v1
-kind: ConfigMap
+apiVersion: v1                      # ✅ Correct capitalization
+kind: ConfigMap                     # Stores configuration data
 metadata:
   name: mysql
   namespace: roboshop
-  data:
-    my.cnf: |
-      [mysqld]
-      innodb_redo_log_capacity = 2G
+data:
+  my.cnf: |                         # Multiline config file content
+    [mysqld]
+    innodb_redo_log_capacity = 2G
+
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: Deployment                    # Creates MySQL Pod(s)
 metadata:
   name: mysql
   namespace: roboshop
@@ -17,57 +18,68 @@ metadata:
     project: roboshop
     component: mysql
     tier: database
+
 spec:
-  replicas: 1
+  replicas: 1                       # Run 1 MySQL pod
+
   selector:
     matchLabels:
       project: roboshop
       component: mysql
       tier: database
+
   template:
     metadata:
       labels:
         project: roboshop
         component: mysql
         tier: database
+
     spec:
       containers:
         - name: mysql
           image: tejahere/mysql:v1
-          imagePullPolicy: Always
-          readinessProbe:
+          imagePullPolicy: Always   # Always pull image from Docker Hub
+
+          readinessProbe:           # Pod ready check
             tcpSocket:
               port: 3306
             initialDelaySeconds: 10
             periodSeconds: 10
-          livenessProbe:
+
+          livenessProbe:            # Pod health check
             tcpSocket:
               port: 3306
             initialDelaySeconds: 20
             periodSeconds: 5
+
           ports:
-            - containerPort: 3306
+            - containerPort: 3306   # MySQL default port
+
           volumeMounts:
             - name: mysql-config
               mountPath: /etc/mysql/conf.d/my.cnf
               subPath: my.cnf
+
       volumes:
         - name: mysql-config
           configMap:
-            name: mysql
-        
+            name: mysql             # Mount ConfigMap into pod
+
 ---
 apiVersion: v1
-kind: Service
+kind: Service                       # Exposes MySQL inside cluster
 metadata:
   name: mysql
   namespace: roboshop
+
 spec:
   selector:
     project: roboshop
     component: mysql
     tier: database
+
   ports:
     - protocol: TCP
-      port: 3306  # service port
-      targetPort: 3306 # container port
+      port: 3306        # Service port
+      targetPort: 3306  # Container port
