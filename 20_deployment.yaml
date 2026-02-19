@@ -13,7 +13,7 @@ spec:
       app: nginx
       project: roboshop
       purpose: deployment-nginx
-  template:
+  template: 
     metadata:
       labels:
         app: nginx
@@ -23,3 +23,5 @@ spec:
       containers:
         - name: nginx
           image: nginx
+          ports:
+            - containerPort: 80
