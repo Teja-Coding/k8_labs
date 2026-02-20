@@ -64,7 +64,7 @@ spec:
       volumes:
         - name: mysql-config
           configMap:
-            name: mysql             # Mount ConfigMap into pod
+            name: mysql             # Mount ConfigMap into pod .
 
 ---
 apiVersion: v1
