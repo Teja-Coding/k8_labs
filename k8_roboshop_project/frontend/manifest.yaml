@@ -32,7 +32,8 @@ data:
         default_type        application/octet-stream;
 
         server {
-            listen 80;
+            listen 8080;
+            listen [::]:8080;
             server_name _;
             root /usr/share/nginx/html;
 
@@ -124,4 +125,4 @@ spec:
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 80
+      targetPort: 8080
