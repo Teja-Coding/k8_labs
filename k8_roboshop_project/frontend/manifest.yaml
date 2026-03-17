@@ -85,7 +85,7 @@ spec:
           image: tejahere/frontend:v1
           imagePullPolicy: Always
           ports:
-            - containerPort: 80
+            - containerPort: 8080
 
           volumeMounts:
             - name: nginx-config
@@ -94,14 +94,14 @@ spec:
 
           readinessProbe:
             httpGet:
-              path: /
-              port: 80
+              path: /health
+              port: 8080
             periodSeconds: 15
 
           livenessProbe:
             httpGet:
-              path: /
-              port: 80
+              path: /health
+              port: 8080
             periodSeconds: 15
 
       volumes:
